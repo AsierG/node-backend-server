@@ -10,7 +10,7 @@ var app = express();
 var Usuario = require('../models/usuario');
 
 //Rutas
-app.get('/', (req, res, next) => {
+app.get('/', mdAutenticacion.verificaToken, (req, res, next) => {
 
     Usuario.find({}, 'nombre email img role')
         .exec(
