@@ -10,7 +10,13 @@ var Usuario = require('../models/usuario');
 
 //Rutas
 app.get('/', (req, res, next) => {
+
+    let desde = req.query.desde || 0;
+    desde = Number(desde);
+
     Medico.find({})
+        .skip(desde)
+        .limit(5)
         .populate('usuario', 'nombre email')
         .populate('hospital')
         .exec(
@@ -22,9 +28,19 @@ app.get('/', (req, res, next) => {
                         errors: err
                     });
                 }
-                res.status(200).json({
-                    ok: true,
-                    medicos: medicos
+                Medico.count({}, (err, total) => {
+                    if (err) {
+                        return res.status(500).json({
+                            ok: false,
+                            mensaje: 'Error calculando el count de medicos',
+                            errors: err
+                        });
+                    }
+                    res.status(200).json({
+                        ok: true,
+                        medicos: medicos,
+                        total: total
+                    });
                 });
             });
 });
