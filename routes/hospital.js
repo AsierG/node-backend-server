@@ -11,6 +11,7 @@ var Usuario = require('../models/usuario');
 //Rutas
 app.get('/', (req, res, next) => {
     Hospital.find({})
+        .populate('usuario', 'nombre email')
         .exec(
             (err, hospitales) => {
                 if (err) {
