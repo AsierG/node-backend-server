@@ -8,7 +8,7 @@ var app = express();
 
 var Usuario = require('../models/usuario');
 
-//Rutas
+// Rutas
 app.get('/', mdAutenticacion.verificaToken, (req, res, next) => {
 
     let desde = req.query.desde || 0;
