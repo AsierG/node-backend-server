@@ -61,6 +61,7 @@ app.put('/:tipo/:id', (req, res, next) => {
 
     // Mover el archivo del temporal a un path
     var path = `./uploads/${ tipo }/${ nombreArchivo }`;
+    console.log('tipo: ' + tipo + ' nombreArchivo ' + nombreArchivo)
 
     archivo.mv(path, err => {
 
