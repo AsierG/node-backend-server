@@ -131,7 +131,7 @@ app.delete('/:id', mdAutenticacion.verificaToken, (req, res) => {
     var id = req.params.id;
     console.log(`Id a borrar ${id}`);
 
-    Usuario.findOneAndDelete(id, (err, usuarioBorrado) => {
+    Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
